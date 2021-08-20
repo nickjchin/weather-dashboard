@@ -22,4 +22,17 @@ submitButton.on("click", function (event) {
   searchHistoryEl.appendChild(cityButton);
 
   return city;
+  getWeather();
 });
+
+// Pass city and API key into:
+// api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+// function getWeather(city, APIKey){
+//     fetch(function (response){
+//         return response.json();
+//     })
+//     .then function(data){
+
+//     }
+// };
