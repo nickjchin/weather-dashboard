@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="Description" content="Enter your description here" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
+  <title>Weather Dashboard</title>
+</head>
+
+<body>
+  <div class="container-fluid p-0">
+    <div class="row">
+      <div class="col-sm-12 header bg-dark text-light">
+        <h1 class="text-center">Weather Dashboard</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 light">
+        <div class="form-group">
+          <h1>Search for a City:</h1>
+          <input type="text" placeholder="Enter a city" id="user-city" class="form-control-sm">
+        </div>
+        <button id="search-button" class="btn btn-primary">Search</button>
+        <div class="search-history"></div>
+      </div>
+      <div class="col-8">
+        <div class="current-conditions"></div>
+        <div class="row">
+          <div class="col-12">
+            <h2>5-day Forecast</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col second-day bg-primary text-white"></div>
+          <div class="col third-day bg-primary text-white"></div>
+          <div class="col forth-day bg-primary text-white"></div>
+          <div class="col fifth-day bg-primary text-white"></div>
+          <div class="col sixth-day bg-primary text-white"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="./assets/script.js"></script>
+</body>
+
+</html>
