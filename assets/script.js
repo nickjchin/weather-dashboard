@@ -15,9 +15,10 @@ submitButton.on("click", function (event) {
 
   // Add city to search history
   var cityButton = document.createElement("button");
-  cityButton.setAttribute("class", "btn btn-secondary");
+  cityButton.setAttribute("class", "btn btn-secondary mt-4 text-darkgray");
   var cityButtonText = localStorage.getItem("city");
   cityButton.innerHTML = cityButtonText;
+  cityButton.setAttribute("id", cityButtonText);
   searchHistoryEl.appendChild(cityButton);
 
   return city;
