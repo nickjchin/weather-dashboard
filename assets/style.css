@@ -10,3 +10,6 @@ button {
 .border-2 {
   border-width: 2px !important;
 }
+.current-conditions h2 {
+  font-size: 1.3em;
+}
