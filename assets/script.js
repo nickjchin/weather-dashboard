@@ -44,6 +44,11 @@ function getWeather() {
       var lat = data.coord.lat;
       var lon = data.coord.lon;
       var today = moment().format("l");
+      var todaysWeath = data.weather[0].icon;
+      var todaysWeathImg = document.createElement("img");
+      todaysWeathImg.src = "https://openweathermap.org/img/wn/" + todaysWeath + "@2x.png";
+
+      console.log(todaysWeath);
 
       currentWeatherContainer.classList.add("border", "border-dark", "p-2", "m-2");
       currentCityEl = document.createElement("h1");
@@ -53,14 +58,17 @@ function getWeather() {
       currentHumidityEl = document.createElement("h2");
 
       currentCityEl.textContent = weatherData.name + " (" + today + ")";
+      currentCityEl.append(todaysWeathImg);
       currentTempEl.textContent = "Temp: " + Math.round(weatherData.main.temp) + "\u00B0F";
       currentWindEl.textContent = "Wind: " + weatherData.wind.speed + "  MPH";
       currentHumidityEl.textContent = "Humidity: " + weatherData.main.humidity + "%";
 
-      currentWeatherContainer.append(currentCityEl);
-      currentWeatherContainer.append(currentTempEl);
-      currentWeatherContainer.append(currentWindEl);
-      currentWeatherContainer.append(currentHumidityEl);
+      currentWeatherContainer.append(
+        currentCityEl,
+        currentTempEl,
+        currentWindEl,
+        currentHumidityEl
+      );
 
       getUV(lat, lon);
       forecast(lat, lon);
@@ -135,15 +143,12 @@ function forecast(lat, lon) {
           weathImg1 = document.createElement("img");
           weath1 = days[i].weather[0].icon;
           console.log(weath1);
-          weathImg1.setAttribute("src", "https://openweathermap.org/img/wn/" + weath1 + "@2x.png");
+          weathImg1.src = "https://openweathermap.org/img/wn/" + weath1 + "@2x.png";
           wind1 = document.createElement("h4");
           wind1.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid1 = document.createElement("h4");
           humid1.textContent = "Humidity: " + days[i].humidity + "%";
           tomorrow.append(date1, weathImg1, temp1, wind1, humid1);
-
-          // function weatherIconDisplay();
-          // if statements for weather icon
         }
         if ((i = 2)) {
           date2 = document.createElement("h3");
@@ -152,7 +157,7 @@ function forecast(lat, lon) {
           temp2.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
           weathImg2 = document.createElement("img");
           weath2 = days[i].weather[0].icon;
-          weathImg2.setAttribute("src", "https://openweathermap.org/img/wn/" + weath2 + "@2x.png");
+          weathImg2.src = "https://openweathermap.org/img/wn/" + weath2 + "@2x.png";
           wind2 = document.createElement("h4");
           wind2.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid2 = document.createElement("h4");
@@ -166,7 +171,7 @@ function forecast(lat, lon) {
           temp3.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
           weathImg3 = document.createElement("img");
           weath3 = days[i].weather[0].icon;
-          weathImg3.setAttribute("src", "https://openweathermap.org/img/wn/" + weath3 + "@2x.png");
+          weathImg3.src = "https://openweathermap.org/img/wn/" + weath3 + "@2x.png";
           wind3 = document.createElement("h4");
           wind3.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid3 = document.createElement("h4");
@@ -180,7 +185,7 @@ function forecast(lat, lon) {
           temp4.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
           weathImg4 = document.createElement("img");
           weath4 = days[i].weather[0].icon;
-          weathImg4.setAttribute("src", "https://openweathermap.org/img/wn/" + weath4 + "@2x.png");
+          weathImg4.src = "https://openweathermap.org/img/wn/" + weath4 + "@2x.png";
           wind4 = document.createElement("h4");
           wind4.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid4 = document.createElement("h4");
@@ -194,7 +199,7 @@ function forecast(lat, lon) {
           temp5.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
           weathImg5 = document.createElement("img");
           weath5 = days[i].weather[0].icon;
-          weathImg5.setAttribute("src", "https://openweathermap.org/img/wn/" + weath5 + "@2x.png");
+          weathImg5.src = "https://openweathermap.org/img/wn/" + weath5 + "@2x.png";
           wind5 = document.createElement("h4");
           wind5.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid5 = document.createElement("h4");
@@ -204,5 +209,3 @@ function forecast(lat, lon) {
       }
     });
 }
-
-function weatherIconDisplay() {}
