@@ -1,3 +1,6 @@
+.form-group h1 {
+  font-size: 2em;
+}
 button {
   width: 100%;
 }
@@ -13,7 +16,12 @@ button {
 .current-conditions h2 {
   font-size: 1.3em;
 }
-
+.forecast h2 {
+  font-size: 1.3em;
+}
+.forecast-days {
+  background-color: #15264e;
+}
 .forecast-days h4 {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
