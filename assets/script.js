@@ -132,56 +132,77 @@ function forecast(lat, lon) {
           date1.textContent = moment().add(1, "day").format("l");
           temp1 = document.createElement("h4");
           temp1.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          weathImg1 = document.createElement("img");
+          weath1 = days[i].weather[0].icon;
+          console.log(weath1);
+          weathImg1.setAttribute("src", "https://openweathermap.org/img/wn/" + weath1 + "@2x.png");
           wind1 = document.createElement("h4");
           wind1.textContent = "Wind: " + days[i].wind_speed + "MPH";
           humid1 = document.createElement("h4");
           humid1.textContent = "Humidity: " + days[i].humidity + "%";
-          tomorrow.append(date1, temp1, wind1, humid1);
+          tomorrow.append(date1, weathImg1, temp1, wind1, humid1);
+
+          // function weatherIconDisplay();
+          // if statements for weather icon
         }
         if ((i = 2)) {
           date2 = document.createElement("h3");
           date2.textContent = moment().add(2, "day").format("l");
           temp2 = document.createElement("h4");
           temp2.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          weathImg2 = document.createElement("img");
+          weath2 = days[i].weather[0].icon;
+          weathImg2.setAttribute("src", "https://openweathermap.org/img/wn/" + weath2 + "@2x.png");
           wind2 = document.createElement("h4");
           wind2.textContent = "Wind: " + days[i].wind_speed + "MPH";
           humid2 = document.createElement("h4");
           humid2.textContent = "Humidity: " + days[i].humidity + "%";
-          dayAfterTomorrow.append(date2, temp2, wind2, humid2);
+          dayAfterTomorrow.append(date2, weathImg2, temp2, wind2, humid2);
         }
         if ((i = 3)) {
           date3 = document.createElement("h3");
           date3.textContent = moment().add(3, "day").format("l");
           temp3 = document.createElement("h4");
           temp3.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          weathImg3 = document.createElement("img");
+          weath3 = days[i].weather[0].icon;
+          weathImg3.setAttribute("src", "https://openweathermap.org/img/wn/" + weath3 + "@2x.png");
           wind3 = document.createElement("h4");
           wind3.textContent = "Wind: " + days[i].wind_speed + "MPH";
           humid3 = document.createElement("h4");
           humid3.textContent = "Humidity: " + days[i].humidity + "%";
-          thirdDay.append(date3, temp3, wind3, humid3);
+          thirdDay.append(date3, weathImg3, temp3, wind3, humid3);
         }
         if ((i = 4)) {
           date4 = document.createElement("h3");
           date4.textContent = moment().add(4, "day").format("l");
           temp4 = document.createElement("h4");
           temp4.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          weathImg4 = document.createElement("img");
+          weath4 = days[i].weather[0].icon;
+          weathImg4.setAttribute("src", "https://openweathermap.org/img/wn/" + weath4 + "@2x.png");
           wind4 = document.createElement("h4");
           wind4.textContent = "Wind: " + days[i].wind_speed + "MPH";
           humid4 = document.createElement("h4");
           humid4.textContent = "Humidity: " + days[i].humidity + "%";
-          fourthDay.append(date4, temp4, wind4, humid4);
+          fourthDay.append(date4, weathImg4, temp4, wind4, humid4);
         }
         if ((i = 5)) {
           date5 = document.createElement("h3");
           date5.textContent = moment().add(5, "day").format("l");
           temp5 = document.createElement("h4");
           temp5.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          weathImg5 = document.createElement("img");
+          weath5 = days[i].weather[0].icon;
+          weathImg5.setAttribute("src", "https://openweathermap.org/img/wn/" + weath5 + "@2x.png");
           wind5 = document.createElement("h4");
           wind5.textContent = "Wind: " + days[i].wind_speed + "MPH";
           humid5 = document.createElement("h4");
           humid5.textContent = "Humidity: " + days[i].humidity + "%";
-          fifthDay.append(date5, temp5, wind5, humid5);
+          fifthDay.append(date5, weathImg5, temp5, wind5, humid5);
         }
       }
     });
 }
+
+function weatherIconDisplay() {}
