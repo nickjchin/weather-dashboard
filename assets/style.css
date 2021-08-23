@@ -13,3 +13,7 @@ button {
 .current-conditions h2 {
   font-size: 1.3em;
 }
+
+.forecast-days h4 {
+  font-size: 1.2em;
+}

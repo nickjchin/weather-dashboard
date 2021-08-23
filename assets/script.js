@@ -20,8 +20,6 @@ submitButton.on("click", function (event) {
   existingCities.push(city);
   localStorage.setItem("allCities", JSON.stringify(existingCities));
 
-  city.value = "";
-
   // Add city to search history
   var cityButton = document.createElement("button");
   cityButton.setAttribute("class", "btn btn-secondary mt-4 text-darkgray");
@@ -134,30 +132,55 @@ function forecast(lat, lon) {
           date1.textContent = moment().add(1, "day").format("l");
           temp1 = document.createElement("h4");
           temp1.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
-          wind1.document.createElement("h4");
+          wind1 = document.createElement("h4");
           wind1.textContent = "Wind: " + days[i].wind_speed + "MPH";
-          humid1.document.createElement("h4");
-          humid1.textContent = "Humidity: " + days[i].tomorrow.append(date1, temp1, wind1);
+          humid1 = document.createElement("h4");
+          humid1.textContent = "Humidity: " + days[i].humidity + "%";
+          tomorrow.append(date1, temp1, wind1, humid1);
         }
         if ((i = 2)) {
           date2 = document.createElement("h3");
           date2.textContent = moment().add(2, "day").format("l");
-          dayAfterTomorrow.append(date2);
+          temp2 = document.createElement("h4");
+          temp2.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          wind2 = document.createElement("h4");
+          wind2.textContent = "Wind: " + days[i].wind_speed + "MPH";
+          humid2 = document.createElement("h4");
+          humid2.textContent = "Humidity: " + days[i].humidity + "%";
+          dayAfterTomorrow.append(date2, temp2, wind2, humid2);
         }
         if ((i = 3)) {
           date3 = document.createElement("h3");
           date3.textContent = moment().add(3, "day").format("l");
-          thirdDay.append(date3);
+          temp3 = document.createElement("h4");
+          temp3.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          wind3 = document.createElement("h4");
+          wind3.textContent = "Wind: " + days[i].wind_speed + "MPH";
+          humid3 = document.createElement("h4");
+          humid3.textContent = "Humidity: " + days[i].humidity + "%";
+          thirdDay.append(date3, temp3, wind3, humid3);
         }
         if ((i = 4)) {
           date4 = document.createElement("h3");
           date4.textContent = moment().add(4, "day").format("l");
-          fourthDay.append(date4);
+          temp4 = document.createElement("h4");
+          temp4.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          wind4 = document.createElement("h4");
+          wind4.textContent = "Wind: " + days[i].wind_speed + "MPH";
+          humid4 = document.createElement("h4");
+          humid4.textContent = "Humidity: " + days[i].humidity + "%";
+          fourthDay.append(date4, temp4, wind4, humid4);
         }
         if ((i = 5)) {
           date5 = document.createElement("h3");
           date5.textContent = moment().add(5, "day").format("l");
-          fifthDay.append(date5);
+          temp5 = document.createElement("h4");
+          temp5.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
+          wind5 = document.createElement("h4");
+          wind5.textContent = "Wind: " + days[i].wind_speed + "MPH";
+          humid5 = document.createElement("h4");
+          humid5.textContent = "Humidity: " + days[i].humidity + "%";
+          fifthDay.append(date5, temp5, wind5, humid5);
         }
       }
     });
