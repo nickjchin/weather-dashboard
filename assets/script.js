@@ -134,8 +134,10 @@ function forecast(lat, lon) {
           date1.textContent = moment().add(1, "day").format("l");
           temp1 = document.createElement("h4");
           temp1.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
-
-          tomorrow.append(date1, temp1);
+          wind1.document.createElement("h4");
+          wind1.textContent = "Wind: " + days[i].wind_speed + "MPH";
+          humid1.document.createElement("h4");
+          humid1.textContent = "Humidity: " + days[i].tomorrow.append(date1, temp1, wind1);
         }
         if ((i = 2)) {
           date2 = document.createElement("h3");
