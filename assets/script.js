@@ -48,7 +48,7 @@ submitButton.on("click", function (event) {
 // Get Current Weather data for submitted city
 function getWeather() {
   fetch(
-    "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey
+    "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey
   )
     .then(function (response) {
       return response.json();
