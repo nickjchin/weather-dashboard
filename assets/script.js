@@ -15,10 +15,24 @@ submitButton.on("click", function (event) {
   console.log("user-city: " + city);
 
   var existingCities = JSON.parse(localStorage.getItem("allCities"));
+  // if (existingCities == null) {
+  //   existingCities = [];
+  //   existingCities.push(city);
+  //   localStorage.setItem("city", JSON.stringify(city));
+  //   localStorage.setItem("allCities", JSON.stringify(existingCities));
+  //   city.value = "";
   if (existingCities == null) existingCities = [];
   localStorage.setItem("city", JSON.stringify(city));
   existingCities.push(city);
   localStorage.setItem("allCities", JSON.stringify(existingCities));
+  // } else {
+  //   city = JSON.parse(localStorage.getItem(city));
+  //   existingCities.push(city);
+  //   localStorage.setItem("city", JSON.stringify(city));
+  //   localStorage.setItem("allCities", JSON.stringify(existingCities));
+  //   city.value = "";
+  // }
+  console.log(existingCities);
 
   // Add city to search history
   var cityButton = document.createElement("button");
@@ -27,6 +41,7 @@ submitButton.on("click", function (event) {
   cityButton.innerHTML = cityButtonText.charAt(0).toUpperCase() + cityButtonText.slice(1);
   cityButton.setAttribute("id", cityButtonText);
   searchHistoryEl.appendChild(cityButton);
+
   getWeather();
 });
 
@@ -48,7 +63,7 @@ function getWeather() {
       var todaysWeathImg = document.createElement("img");
       todaysWeathImg.src = "https://openweathermap.org/img/wn/" + todaysWeath + "@2x.png";
 
-      console.log(todaysWeath);
+      // console.log(todaysWeath);
 
       currentWeatherContainer.classList.add("border", "border-dark", "p-2", "m-2");
       currentCityEl = document.createElement("h1");
@@ -142,7 +157,7 @@ function forecast(lat, lon) {
           temp1.textContent = "Temp: " + Math.round(days[i].temp.day) + "\u00B0F";
           weathImg1 = document.createElement("img");
           weath1 = days[i].weather[0].icon;
-          console.log(weath1);
+          // console.log(weath1);
           weathImg1.src = "https://openweathermap.org/img/wn/" + weath1 + "@2x.png";
           wind1 = document.createElement("h4");
           wind1.textContent = "Wind: " + days[i].wind_speed + " MPH";
