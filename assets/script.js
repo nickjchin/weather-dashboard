@@ -8,47 +8,50 @@ var searchHistoryEl = document.querySelector(".search-history");
 var currentWeatherContainer = document.querySelector(".current-conditions");
 var forecastContainer = document.querySelector(".forecast");
 
+var tomorrow = document.getElementById("1");
+var dayAfterTomorrow = document.getElementById("2");
+var thirdDay = document.getElementById("3");
+var fourthDay = document.getElementById("4");
+var fifthDay = document.getElementById("5");
+
+window.onload = function () {
+  localStorage.clear();
+};
+
 //Get user city input and save to localStorage
 submitButton.on("click", function (event) {
-  event.preventDefault();
-  city = city.value;
-  console.log("user-city: " + city);
+  newCity = city.value;
+  console.log("user-city: " + newCity);
 
   var existingCities = JSON.parse(localStorage.getItem("allCities"));
-  // if (existingCities == null) {
-  //   existingCities = [];
-  //   existingCities.push(city);
-  //   localStorage.setItem("city", JSON.stringify(city));
-  //   localStorage.setItem("allCities", JSON.stringify(existingCities));
-  //   city.value = "";
   if (existingCities == null) existingCities = [];
-  localStorage.setItem("city", JSON.stringify(city));
-  existingCities.push(city);
+  localStorage.setItem("city", JSON.stringify(newCity));
+  resetCityWeather();
+  existingCities.push(newCity);
   localStorage.setItem("allCities", JSON.stringify(existingCities));
-  // } else {
-  //   city = JSON.parse(localStorage.getItem(city));
-  //   existingCities.push(city);
-  //   localStorage.setItem("city", JSON.stringify(city));
-  //   localStorage.setItem("allCities", JSON.stringify(existingCities));
-  //   city.value = "";
-  // }
+
   console.log(existingCities);
+
+  // Get Localstorage and render it in box
 
   // Add city to search history
   var cityButton = document.createElement("button");
-  cityButton.setAttribute("class", "btn btn-secondary mt-4 text-darkgray");
+  cityButton.setAttribute("class", "my-button btn btn-secondary mt-4 text-darkgray");
   var cityButtonText = JSON.parse(localStorage.getItem("city"));
   cityButton.innerHTML = cityButtonText.charAt(0).toUpperCase() + cityButtonText.slice(1);
-  cityButton.setAttribute("id", cityButtonText);
+  cityButton.setAttribute("id", cityButtonText, "onclick");
   searchHistoryEl.appendChild(cityButton);
-
-  getWeather();
+  var cityName = newCity;
+  getWeather(cityName);
 });
 
 // Get Current Weather data for submitted city
-function getWeather() {
+function getWeather(cityName) {
   fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+      cityName +
+      "&units=imperial&appid=" +
+      APIKey
   )
     .then(function (response) {
       return response.json();
@@ -68,9 +71,13 @@ function getWeather() {
       currentWeatherContainer.classList.add("border", "border-dark", "p-2", "m-2");
       currentCityEl = document.createElement("h1");
       currentCityEl.classList.add(lat, lon);
+      currentCityEl.setAttribute("id", "currentCity");
       currentTempEl = document.createElement("h2");
+      currentTempEl.setAttribute("id", "currentTemp");
       currentWindEl = document.createElement("h2");
+      currentWindEl.setAttribute("id", "currentWind");
       currentHumidityEl = document.createElement("h2");
+      currentHumidityEl.setAttribute("id", "currentHum");
 
       currentCityEl.textContent = weatherData.name + " (" + today + ")";
       currentCityEl.append(todaysWeathImg);
@@ -84,11 +91,46 @@ function getWeather() {
         currentWindEl,
         currentHumidityEl
       );
-
       getUV(lat, lon);
       forecast(lat, lon);
     });
 }
+
+function resetCityWeather() {
+  var existingCities = JSON.parse(localStorage.getItem("allCities"));
+  if (existingCities) {
+    if (existingCities.length > 0 && existingCities !== null) {
+      var removeCurrentCity = document.getElementById("currentCity");
+      removeCurrentCity.remove();
+      var removeCurrentTemp = document.getElementById("currentTemp");
+      removeCurrentTemp.remove();
+      var removeCurrentWind = document.getElementById("currentWind");
+      removeCurrentWind.remove();
+      var removeCurrentHum = document.getElementById("currentHum");
+      removeCurrentHum.remove();
+      var removeCurrentUV = document.getElementById("currentUV");
+      removeCurrentUV.remove();
+      forecastTitle.textContent = "";
+      var removeTomorrow = document.getElementById("day1");
+      removeTomorrow.remove();
+      var removeDayAfterTomorrow = document.getElementById("day2");
+      removeDayAfterTomorrow.remove();
+      var removeThirdDay = document.getElementById("day3");
+      removeThirdDay.remove();
+      var removeFourthDay = document.getElementById("day4");
+      removeFourthDay.remove();
+      var removeFifthDay = document.getElementById("day5");
+      removeFifthDay.remove();
+    }
+  }
+}
+
+$(document).on("click", ".my-button", function () {
+  resetCityWeather();
+  var cityName = $(this).attr("id");
+  getWeather(cityName);
+});
+
 function getUV(lat, lon) {
   fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -106,6 +148,7 @@ function getUV(lat, lon) {
       var uvData = data.current;
 
       currentUVIndexEl = document.createElement("h2");
+      currentUVIndexEl.setAttribute("id", "currentUV");
       currentUVIndexEl.textContent = "UV Index: ";
       currentUVSpan = document.createElement("span");
       currentUVSpan.textContent = uvData.uvi;
@@ -121,6 +164,7 @@ function getUV(lat, lon) {
       }
     });
 }
+
 function forecast(lat, lon) {
   fetch(
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -141,16 +185,12 @@ function forecast(lat, lon) {
       forecastTitle.textContent = "5-day Forecast";
       forecastContainer.append(forecastTitle);
 
-      var tomorrow = document.getElementById("1");
-      var dayAfterTomorrow = document.getElementById("2");
-      var thirdDay = document.getElementById("3");
-      var fourthDay = document.getElementById("4");
-      var fifthDay = document.getElementById("5");
-
       for (var i = 1; i < 5; i++) {
         // want to skip 0 as 0 is today
         // console.log(data.daily[i].temp);
         if ((i = 1)) {
+          day1Container = document.createElement("div");
+          day1Container.setAttribute("id", "day1");
           date1 = document.createElement("h3");
           date1.textContent = moment().add(1, "day").format("l");
           temp1 = document.createElement("h4");
@@ -163,9 +203,12 @@ function forecast(lat, lon) {
           wind1.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid1 = document.createElement("h4");
           humid1.textContent = "Humidity: " + days[i].humidity + "%";
-          tomorrow.append(date1, weathImg1, temp1, wind1, humid1);
+          day1Container.append(date1, weathImg1, temp1, wind1, humid1);
+          tomorrow.append(day1Container);
         }
         if ((i = 2)) {
+          day2Container = document.createElement("div");
+          day2Container.setAttribute("id", "day2");
           date2 = document.createElement("h3");
           date2.textContent = moment().add(2, "day").format("l");
           temp2 = document.createElement("h4");
@@ -177,9 +220,12 @@ function forecast(lat, lon) {
           wind2.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid2 = document.createElement("h4");
           humid2.textContent = "Humidity: " + days[i].humidity + "%";
-          dayAfterTomorrow.append(date2, weathImg2, temp2, wind2, humid2);
+          day2Container.append(date2, weathImg2, temp2, wind2, humid2);
+          dayAfterTomorrow.append(day2Container);
         }
         if ((i = 3)) {
+          day3Container = document.createElement("div");
+          day3Container.setAttribute("id", "day3");
           date3 = document.createElement("h3");
           date3.textContent = moment().add(3, "day").format("l");
           temp3 = document.createElement("h4");
@@ -191,9 +237,12 @@ function forecast(lat, lon) {
           wind3.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid3 = document.createElement("h4");
           humid3.textContent = "Humidity: " + days[i].humidity + "%";
-          thirdDay.append(date3, weathImg3, temp3, wind3, humid3);
+          day3Container.append(date3, weathImg3, temp3, wind3, humid3);
+          thirdDay.append(day3Container);
         }
         if ((i = 4)) {
+          day4Container = document.createElement("div");
+          day4Container.setAttribute("id", "day4");
           date4 = document.createElement("h3");
           date4.textContent = moment().add(4, "day").format("l");
           temp4 = document.createElement("h4");
@@ -205,9 +254,12 @@ function forecast(lat, lon) {
           wind4.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid4 = document.createElement("h4");
           humid4.textContent = "Humidity: " + days[i].humidity + "%";
-          fourthDay.append(date4, weathImg4, temp4, wind4, humid4);
+          day4Container.append(date4, weathImg4, temp4, wind4, humid4);
+          fourthDay.append(day4Container);
         }
         if ((i = 5)) {
+          day5Container = document.createElement("div");
+          day5Container.setAttribute("id", "day5");
           date5 = document.createElement("h3");
           date5.textContent = moment().add(5, "day").format("l");
           temp5 = document.createElement("h4");
@@ -219,7 +271,8 @@ function forecast(lat, lon) {
           wind5.textContent = "Wind: " + days[i].wind_speed + " MPH";
           humid5 = document.createElement("h4");
           humid5.textContent = "Humidity: " + days[i].humidity + "%";
-          fifthDay.append(date5, weathImg5, temp5, wind5, humid5);
+          day5Container.append(date5, weathImg5, temp5, wind5, humid5);
+          fifthDay.append(day5Container);
         }
       }
     });
